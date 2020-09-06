@@ -1,0 +1,18 @@
+.cards {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 282px);
+    gap: 20px 18px;
+}
+
+@media (min-width: 320px) and (max-width: 600px) {   
+    .cards {
+        justify-content: center;
+        gap: 20px 0;         
+    }
+}
+
+
+

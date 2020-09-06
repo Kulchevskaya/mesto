@@ -1,0 +1,21 @@
+.cards__like {
+    max-width: 21px;
+    max-height: 19px;
+    padding: 10.5px 9.5px;
+    margin: 0 15px 0 0;
+    
+    box-shadow: none;
+    background: none;
+    border: none; 
+    background-image: url(../../../images/like.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+}
+
+
+
+
+
+

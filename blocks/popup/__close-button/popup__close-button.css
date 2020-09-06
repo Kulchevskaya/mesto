@@ -1,0 +1,24 @@
+.popup__close-button {
+  max-width: 40px;
+  max-height: 40px;
+  padding: 20px;
+  box-shadow: none;
+  background: none;
+  border: none; 
+  background-image: url(../../../images/close.svg);
+  background-size: 140%;
+  background-repeat: no-repeat;
+  background-position: center;   
+  align-self: flex-end;
+  margin: -40px -40px 0 0;
+}
+
+.popup__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* уберем выделение голубым при выборе */
+.popup__close-button:focus {
+  outline: none;
+}
