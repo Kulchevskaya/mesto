@@ -1,5 +1,6 @@
 .profile__avatar {
      max-width: 120px;
+     max-height: 120px; /* если не прописать, то в Сафари элипс */
      border-radius: 50%;
      margin-right: 30px;
 }
