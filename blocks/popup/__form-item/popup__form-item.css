@@ -12,10 +12,6 @@
   margin-bottom: 30px; 
 }
 
-.popup__form-item:nth-last-of-type(2) {
-  margin-bottom: 48px;
-}
-
 /* уберем выделение голубым при выборе */
 .popup__form-item:focus {
   outline: none;

@@ -16,3 +16,10 @@
   background-color: rgba(0, 0, 0, .8);
   cursor: pointer;
 }
+
+@media (min-width: 320px) and (max-width: 600px) {   
+  .popup__submit-button {
+    font-size: 12px;
+    line-height: 18px;          
+  }
+}

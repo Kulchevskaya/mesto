@@ -22,3 +22,9 @@
 .popup__close-button:focus {
   outline: none;
 }
+
+@media (min-width: 320px) and (max-width: 600px) {   
+  .popup__close-button {
+    margin: -45px 0 0 0;     
+  }
+}

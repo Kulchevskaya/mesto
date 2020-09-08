@@ -6,3 +6,11 @@
   line-height: 29px;
   color: #000000;
 }
+
+@media (min-width: 320px) and (max-width: 600px) {   
+  .popup__heading {
+    margin: 0 0 36px;
+    font-size: 18px;
+    line-height: 22px;          
+  }
+}

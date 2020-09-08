@@ -2,27 +2,36 @@
 console.log('Привет, Мир!');
 
 // Делаем выборку DOM элементов и пишем конст, т.к. переменные не будут меняться
-const popup = document.querySelector('.popup');
-const popupOpenButton = document.querySelector('.profile__edit-button');
-const popupCloseButton = popup.querySelector('.popup__close-button');
+let popup = document.querySelector('.popup');
+let popupOpenButton = document.querySelector('.profile__edit-button');
+let popupCloseButton = popup.querySelector('.popup__close-button');
+
+// Находим форму в DOM, поля формы и поля, куда вставляем... для формы отправки
+let formElement = document.querySelector('.popup__form'); // Воспользуйтесь методом querySelector()
+let nameInput = formElement.querySelector('.popup__form-item_js_name-input'); 
+let jobInput = formElement.querySelector('.popup__form-item_js_job-input');
+let nameProfile = document.querySelector('.profile__name');
+let jobProfile = document.querySelector('.profile__job');
 
 // Функция по доабвлению класса (на основе вебинара)
-const popupToggle = (event) => {
+let popupToggle = (event) => {
   popup.classList.toggle('popup_opened');  
+}
+
+// Функция по взятию значений профаила в инпут
+let popupGetInfo = (event) => {
+  getName = nameProfile.textContent;
+  getJob = jobProfile.textContent;
+  nameInput.value = getName;
+  jobInput.value = getJob;
 }
 
 // Регистрируем обработчики событий по клику (на основе вебинара)
 popupOpenButton.addEventListener('click', popupToggle, false);
 popupCloseButton.addEventListener('click', popupToggle, false);
+popupOpenButton.addEventListener('click', popupGetInfo, false);
 
 // Этап 2 форма отправки (Если код не работает, то м.б. не тот тип input &FTS)
-
-// Находим форму в DOM, поля формы и поля, куда вставляем...
-const formElement = document.querySelector('.popup__form'); // Воспользуйтесь методом querySelector()
-const nameInput = formElement.querySelector('.js-popup__name-input'); 
-const jobInput = formElement.querySelector('.js-popup__job-input');
-const nameProfile = document.querySelector('.profile__name');
-const jobProfile = document.querySelector('.profile__job');
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 function formSubmitHandler (evt) {
