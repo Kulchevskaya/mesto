@@ -26,8 +26,9 @@
       </section>
       
       <section class="gallery">
-        <ul class="cards">
-          <li class="cards__item">
+        <ul class="cards">          
+          <!-- <li class="cards__item">
+            <button class="cards__delete" type="button"></button>
             <img class="cards__image" src="./images/Karachavaesk.jpg" alt="Карачаевск">
             <div class="cards__box">
               <h2 class="cards__text">Карачаевск</h2>
@@ -35,6 +36,7 @@
             </div>
           </li>
           <li class="cards__item">
+            <button class="cards__delete" type="button"></button>
             <img class="cards__image" src="./images/Elbrus.png" alt="Эльбрус">
             <div class="cards__box">
               <h2 class="cards__text">Гора Эльбрус</h2>
@@ -42,6 +44,7 @@
             </div>
           </li>
           <li class="cards__item">
+            <button class="cards__delete" type="button"></button>
             <img class="cards__image" src="./images/Dombai.png" alt="Домбай">
             <div class="cards__box">
               <h2 class="cards__text">Домбай</h2>
@@ -49,6 +52,7 @@
             </div>
           </li>
           <li class="cards__item">
+            <button class="cards__delete" type="button"></button>
             <img class="cards__image" src="./images/Elbrus.png" alt="Эльбрус">
             <div class="cards__box">
               <h2 class="cards__text">Эльбрус</h2>
@@ -56,6 +60,7 @@
             </div>
           </li>
           <li class="cards__item">
+            <button class="cards__delete" type="button"></button>
             <img class="cards__image" src="./images/Dombai.png" alt="Домбай">
             <div class="cards__box">
               <h2 class="cards__text">Высокая гора Домбай</h2>
@@ -63,12 +68,13 @@
             </div>
           </li>
           <li class="cards__item">
+            <button class="cards__delete" type="button"></button>
             <img class="cards__image" src="./images/Karachavaesk.jpg" alt="Карачаевск">
             <div class="cards__box">
               <h2 class="cards__text">Карачаево-Черкеск</h2>
               <button class="cards__like" type="button"></button>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>  
     </main>
@@ -87,7 +93,36 @@
         </form>        
       </div>
     </section>
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>        
+        <form class="popup__form" method="POST" name="add-form">
+          <h3 class="popup__heading">Новое место</h3> <!-- А пока вполне универсально... (16-09-2020) -->
+          <input type="text" class="popup__form-item popup__form-item_js_place-title-input" name="title" placeholder="Название">
+          <input type="text" class="popup__form-item popup__form-item_js_image-url-input" name="image-url" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__submit-button">Создать</button>
+        </form>        
+      </div>
+    </section>
   </div>
+  <section class="popup">
+    <figure class="popup__image-container">
+      <button class="popup__close-button" type="button"></button> 
+      <img class="popup__image" src="" alt="">
+      <figcaption class="popup__caption"></figcaption>
+    </figure>
+  </section>
+</div>
+  <template id="card-template">
+    <li class="cards__item">
+      <button class="cards__delete" type="button"></button>
+      <img class="cards__image" src="" alt="">
+      <div class="cards__box">
+        <h2 class="cards__text"></h2>
+        <button class="cards__like" type="button"></button>
+      </div>
+    </li>    
+  </template>
   <script src="./scripts/index.js" defer></script>
 </body>
 </html>

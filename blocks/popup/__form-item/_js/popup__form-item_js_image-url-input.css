@@ -1,9 +1,9 @@
-.popup__form-item_js_job-input {
+.popup__form-item_js_image-url-input {
   margin-bottom: 48px;
 }
 
 @media (min-width: 320px) and (max-width: 600px) {   
-  .popup__form-item_js_job-input {
+  .popup__form-item_js_image-url-input {
     margin-bottom: 36px;       
   }
 }

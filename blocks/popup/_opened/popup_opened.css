@@ -1,3 +1,7 @@
 .popup_opened {
-  display: flex;   
+  z-index: 5; 
+  /* Появляется как в дымке */
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
 }
