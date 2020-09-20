@@ -23,58 +23,9 @@
           <p class="profile__job">Исследователь океана</p>
         </div>         
         <button class="profile__add-button" type="button"></button>        
-      </section>
-      
+      </section>      
       <section class="gallery">
-        <ul class="cards">          
-          <!-- <li class="cards__item">
-            <button class="cards__delete" type="button"></button>
-            <img class="cards__image" src="./images/Karachavaesk.jpg" alt="Карачаевск">
-            <div class="cards__box">
-              <h2 class="cards__text">Карачаевск</h2>
-              <button class="cards__like" type="button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <button class="cards__delete" type="button"></button>
-            <img class="cards__image" src="./images/Elbrus.png" alt="Эльбрус">
-            <div class="cards__box">
-              <h2 class="cards__text">Гора Эльбрус</h2>
-              <button class="cards__like" type="button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <button class="cards__delete" type="button"></button>
-            <img class="cards__image" src="./images/Dombai.png" alt="Домбай">
-            <div class="cards__box">
-              <h2 class="cards__text">Домбай</h2>
-              <button class="cards__like" type="button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <button class="cards__delete" type="button"></button>
-            <img class="cards__image" src="./images/Elbrus.png" alt="Эльбрус">
-            <div class="cards__box">
-              <h2 class="cards__text">Эльбрус</h2>
-              <button class="cards__like" type="button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <button class="cards__delete" type="button"></button>
-            <img class="cards__image" src="./images/Dombai.png" alt="Домбай">
-            <div class="cards__box">
-              <h2 class="cards__text">Высокая гора Домбай</h2>
-              <button class="cards__like" type="button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <button class="cards__delete" type="button"></button>
-            <img class="cards__image" src="./images/Karachavaesk.jpg" alt="Карачаевск">
-            <div class="cards__box">
-              <h2 class="cards__text">Карачаево-Черкеск</h2>
-              <button class="cards__like" type="button"></button>
-            </div>
-          </li> -->
+        <ul class="cards">
         </ul>
       </section>  
     </main>
@@ -82,29 +33,29 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>        
     </footer>
 
-    <section class="popup">
+    <section class="popup popup_js_edit-form">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>        
         <form class="popup__form" method="POST" name="profile-edit">
-          <h3 class="popup__heading">Редактировать профиль</h3> <!--Скрытые заголовки с 3 уровня! +Потом надо заголовок вынести из формы, чтобы была универсальная структура и вообще пересмотреть код в этой части (заг / обертка для контента с подзагами и прочим) -->
-          <input type="text" class="popup__form-item popup__form-item_js_name-input" name="name">
-          <input type="text" class="popup__form-item popup__form-item_js_job-input" name="job">
+          <h3 class="popup__heading">Редактировать профиль</h3> 
+          <input type="text" class="popup__form-item popup__form-item_js_name-input" name="name" placeholder="Имя">
+          <input type="text" class="popup__form-item popup__form-item_js_job-input" name="job" placeholder="Профессия">
           <button type="submit" class="popup__submit-button">Сохранить</button>
         </form>        
       </div>
     </section>
-    <section class="popup">
+    <section class="popup popup_js_add-form">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>        
-        <form class="popup__form" method="POST" name="add-form">
-          <h3 class="popup__heading">Новое место</h3> <!-- А пока вполне универсально... (16-09-2020) -->
+        <form class="popup__form popup__form_js_add-form" method="POST" name="add-form">
+          <h3 class="popup__heading">Новое место</h3> 
           <input type="text" class="popup__form-item popup__form-item_js_place-title-input" name="title" placeholder="Название">
           <input type="text" class="popup__form-item popup__form-item_js_image-url-input" name="image-url" placeholder="Ссылка на картинку">
           <button type="submit" class="popup__submit-button">Создать</button>
         </form>        
       </div>
     </section>  
-    <section class="popup">
+    <section class="popup popup_js_zoom-image">
       <figure class="popup__image-container">
         <button class="popup__close-button" type="button"></button> 
         <img class="popup__image" src="" alt="">
@@ -121,7 +72,7 @@
         <button class="cards__like" type="button"></button>
       </div>
     </li>    
-  </template>
-  <script src="./scripts/index.js" defer></script>
+  </template>  
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
