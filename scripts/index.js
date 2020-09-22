@@ -1,29 +1,29 @@
 // Выборка элементов для формы редактирования
-const popup = document.querySelector('.popup_js_edit-form');
-const popupOpenButton = document.querySelector('.profile__edit-button');
-const popupCloseButton = popup.querySelector('.popup__close-button');
+const popupEditProfile = document.querySelector('.popup_type_edit-form');
+const popupEditProfileOpenButton = document.querySelector('.profile__edit-button');
+const popupEditProfileCloseButton = popupEditProfile.querySelector('.popup__close-button');
 
 const formElement = document.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__form-item_js_name-input'); 
-const jobInput = formElement.querySelector('.popup__form-item_js_job-input');
+const nameInput = formElement.querySelector('.popup__form-item_type_name-input'); 
+const jobInput = formElement.querySelector('.popup__form-item_type_job-input');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__job');
 
 // Выборка элементов для формы добавления
-const popupAddForm = document.querySelector('.popup_js_add-form');
+const popupAddForm = document.querySelector('.popup_type_add-form');
 const popupOpenButtonAddForm = document.querySelector('.profile__add-button');
 const popupCloseButtonAddForm = popupAddForm.querySelector('.popup__close-button');
 
-const formAddElement = popupAddForm.querySelector('.popup__form_js_add-form');
-const titleInput = popupAddForm.querySelector('.popup__form-item_js_place-title-input');
-const imageUrlInput = popupAddForm.querySelector('.popup__form-item_js_image-url-input');
+const formAddElement = popupAddForm.querySelector('.popup__form_type_add-form');
+const titleInput = popupAddForm.querySelector('.popup__form-item_type_place-title-input');
+const imageUrlInput = popupAddForm.querySelector('.popup__form-item_type_image-url-input');
 
 // Выборка элементов template карточек
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsContainer = document.querySelector('.cards');
 
 // Выборка элементов для попап увеличения картинок
-const imagePopup = document.querySelector('.popup_js_zoom-image');
+const imagePopup = document.querySelector('.popup_type_zoom-image');
 const imagePopupCloseButton = imagePopup.querySelector('.popup__close-button');
 const imagePopupUrl = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__caption');
@@ -67,10 +67,14 @@ const getUserInfo = () => {
   jobInput.value = jobProfile.textContent;
 }
 
+const toggleEditUserProfilePopup = () => {
+  getUserInfo();
+  togglePopup (popupEditProfile);
+}
+
 // Регистрируем обработчики событий по попапам
-popupOpenButton.addEventListener('click', () => {togglePopup(popup)});
-popupCloseButton.addEventListener('click', () => {togglePopup(popup)});
-popupOpenButton.addEventListener('click', getUserInfo, false);
+popupEditProfileOpenButton.addEventListener('click', toggleEditUserProfilePopup);
+popupEditProfileCloseButton.addEventListener('click', () => {togglePopup(popupEditProfile)});
 popupOpenButtonAddForm.addEventListener('click', () => {togglePopup(popupAddForm)});
 popupCloseButtonAddForm.addEventListener('click', () => {togglePopup(popupAddForm)});
 imagePopupCloseButton.addEventListener('click', () => {togglePopup(imagePopup)});
@@ -82,29 +86,30 @@ const formSubmitHandler = (evt) => {
 												// О том, как это делать, расскажем позже.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  togglePopup(popup);  
+  togglePopup(popupEditProfile);  
 }
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
 // Функция по удалению карточки
 const deleteCard = (evt) => {
-	const eventTarget = evt.target;
+  const eventTarget = evt.target;
   eventTarget.closest('.cards__item').remove();
 }
 
 // Функция по лайкам карточки
 const likeCard = (evt) => {
-	const eventTarget = evt.target;
+  const eventTarget = evt.target;
   eventTarget.classList.toggle('cards__like_active');
 }
 
 // Функция по увеличению карточек
 const zoomImage = (evt) => {
   const eventTarget = evt.target;
-  imagePopupUrl.src = eventTarget.src
-  imagePopupCaption.textContent = eventTarget.alt
-  togglePopup(imagePopup)
+  imagePopupUrl.src = eventTarget.src;
+  imagePopupUrl.alt = eventTarget.alt;
+  imagePopupCaption.textContent = eventTarget.alt;
+  togglePopup(imagePopup);
 }
 
 // Функция по добавлению обработчика для карточек (лайк, удалить)
@@ -114,32 +119,38 @@ function setCardListeners(element) {
   element.querySelector('.cards__image').addEventListener('click', zoomImage);
 }
 
+// Функция по созданию карточки
 function createCard({name, link}) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.cards__image').alt = name;
-  cardElement.querySelector('.cards__image').src = link;
+  const cardElementImage = cardElement.querySelector('.cards__image');
+  cardElementImage.alt = name;
+  cardElementImage.src = link;
   cardElement.querySelector('.cards__text').textContent = name;
   setCardListeners(cardElement);
-  cardsContainer.appendChild(cardElement);
-}
-
-// Функции по выводу карточек из массива
-function renderInitialCards(array) {
-	array.forEach(createCard);
+  return cardElement;  
 }
 
 // Функция по добавлению карточки
+function addCard(item) {
+  cardsContainer.prepend(item);
+}
+
+// Функция по выводу карточек в прод (╯ ° □ °) ╯ (┻━┻)
+function renderInitialCards(array) {
+  const arrayWithCards = array.map(createCard);
+  arrayWithCards.forEach(addCard);  
+}
+
+// Функция по добавлению новых карточек юзером
 function formAddSubmitHandler (evt) {
-	evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 												// Так мы можем определить свою логику отправки.
 												// О том, как это делать, расскажем позже.
-  
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.cards__image').alt = titleInput.value;
-  cardElement.querySelector('.cards__image').src = imageUrlInput.value;
-  cardElement.querySelector('.cards__text').textContent = titleInput.value;
-  setCardListeners(cardElement);
-  cardsContainer.prepend(cardElement);
+  const card = createCard({
+    name: titleInput.value,
+    link: imageUrlInput.value
+  });
+  addCard(card);
 
   togglePopup(popupAddForm);
   titleInput.value = '';
