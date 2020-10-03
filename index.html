@@ -36,10 +36,18 @@
     <section class="popup popup_type_edit-form">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>        
-        <form class="popup__form" method="POST" name="profile-edit">
-          <h3 class="popup__heading">Редактировать профиль</h3> 
-          <input type="text" class="popup__form-item popup__form-item_type_name-input" name="name" placeholder="Имя">
-          <input type="text" class="popup__form-item popup__form-item_type_job-input" name="job" placeholder="Профессия">
+        <form class="popup__form" method="POST" name="profile-edit" novalidate>
+          <h3 class="popup__heading">Редактировать профиль</h3>   
+          <label class="popup__field">    
+            <input class="popup__form-item popup__form-item_type_name-input" name="name" id="name" placeholder="Имя"
+                type="text" minlength="2" maxlength="40" required>
+            <span class="popup__error-text" id="name-error"></span> 
+          </label>
+          <label class="popup__field">         
+            <input class="popup__form-item popup__form-item_type_job-input" name="job" id="job" placeholder="Профессия"
+                type="text" minlength="2" maxlength="200" required>
+            <span class="popup__error-text" id="job-error"></span>
+          </label>          
           <button type="submit" class="popup__submit-button">Сохранить</button>
         </form>        
       </div>
@@ -47,10 +55,16 @@
     <section class="popup popup_type_add-form">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>        
-        <form class="popup__form popup__form_type_add-form" method="POST" name="add-form">
+        <form class="popup__form popup__form_type_add-form" method="POST" name="add-form" novalidate>
           <h3 class="popup__heading">Новое место</h3> 
-          <input type="text" class="popup__form-item popup__form-item_type_place-title-input" name="title" placeholder="Название">
-          <input type="text" class="popup__form-item popup__form-item_type_image-url-input" name="image-url" placeholder="Ссылка на картинку">
+          <label class="popup__field"> 
+            <input type="text" minlength="2" maxlength="30" required class="popup__form-item popup__form-item_type_place-title-input" name="title" placeholder="Название">
+            <span class="popup__error-text"></span>
+          </label> 
+          <label class="popup__field">
+            <input type="url" required class="popup__form-item popup__form-item_type_image-url-input" name="image-url" placeholder="Ссылка на картинку">
+            <span class="popup__error-text"></span>
+          </label>          
           <button type="submit" class="popup__submit-button">Создать</button>
         </form>        
       </div>
@@ -72,7 +86,8 @@
         <button class="cards__like" type="button"></button>
       </div>
     </li>    
-  </template>  
+  </template>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

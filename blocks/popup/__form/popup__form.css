@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: normal;
+  position: relative;
 }
 
 @media (min-width: 320px) and (max-width: 600px) {   

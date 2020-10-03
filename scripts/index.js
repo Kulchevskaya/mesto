@@ -79,6 +79,29 @@ popupOpenButtonAddForm.addEventListener('click', () => {togglePopup(popupAddForm
 popupCloseButtonAddForm.addEventListener('click', () => {togglePopup(popupAddForm)});
 imagePopupCloseButton.addEventListener('click', () => {togglePopup(imagePopup)});
 
+// Функция по закрытию попапов кнопкой esc
+const closePopupWithEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    popupToClose = document.querySelector('.popup_opened');
+    togglePopup(popupToClose)
+  }
+}
+
+document.addEventListener('keydown', closePopupWithEsc);
+
+//Функция по закрытию по оверлею
+const closePopupByClickOnOverlay = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    popupToClose = document.querySelector('.popup_opened');
+    togglePopup(popupToClose)
+  }
+}
+
+const popups = Array.from(document.querySelectorAll('.popup'));
+popups.forEach((formElement) => {
+  formElement.addEventListener('mouseup', closePopupByClickOnOverlay);
+});
+
 // Функция по редактированию профиля 
 const formSubmitHandler = (evt) => {
 	evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
