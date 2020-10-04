@@ -67,18 +67,6 @@ const getUserInfo = () => {
   jobInput.value = jobProfile.textContent;
 }
 
-const toggleEditUserProfilePopup = () => {
-  getUserInfo();
-  togglePopup (popupEditProfile);
-}
-
-// Регистрируем обработчики событий по попапам
-popupEditProfileOpenButton.addEventListener('click', toggleEditUserProfilePopup);
-popupEditProfileCloseButton.addEventListener('click', () => {togglePopup(popupEditProfile)});
-popupOpenButtonAddForm.addEventListener('click', () => {togglePopup(popupAddForm)});
-popupCloseButtonAddForm.addEventListener('click', () => {togglePopup(popupAddForm)});
-imagePopupCloseButton.addEventListener('click', () => {togglePopup(imagePopup)});
-
 // Функция по закрытию попапов кнопкой esc
 const closePopupWithEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -86,14 +74,37 @@ const closePopupWithEsc = (evt) => {
     togglePopup(popupToClose)
   }
 }
+ // Функция открытия попапа с дополнениями 
+const openPopup = (item) => {
+  togglePopup(item);
+  document.addEventListener('keydown', closePopupWithEsc);
+}
 
-document.addEventListener('keydown', closePopupWithEsc);
+const closePopup = (item) => {
+  togglePopup(item);
+  document.addEventListener('keydown', closePopupWithEsc);
+}
+
+
+// Функция по открытию Попапа профиля
+const toggleEditUserProfilePopup = () => {
+  getUserInfo();
+  openPopup(popupEditProfile);
+}
+
+// Регистрируем обработчики событий по попапам
+popupEditProfileOpenButton.addEventListener('click', toggleEditUserProfilePopup);
+popupEditProfileCloseButton.addEventListener('click', () => {closePopup(popupEditProfile)});
+popupOpenButtonAddForm.addEventListener('click', () => {openPopup(popupAddForm)});
+popupCloseButtonAddForm.addEventListener('click', () => {closePopup(popupAddForm)});
+imagePopupCloseButton.addEventListener('click', () => {closePopup(imagePopup)});
+
 
 //Функция по закрытию по оверлею
 const closePopupByClickOnOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
     popupToClose = document.querySelector('.popup_opened');
-    togglePopup(popupToClose)
+    closePopup(popupToClose);
   }
 }
 
@@ -109,7 +120,7 @@ const formSubmitHandler = (evt) => {
 												// О том, как это делать, расскажем позже.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  togglePopup(popupEditProfile);  
+  closePopup(popupEditProfile);  
 }
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
@@ -132,7 +143,7 @@ const zoomImage = (evt) => {
   imagePopupUrl.src = eventTarget.src;
   imagePopupUrl.alt = eventTarget.alt;
   imagePopupCaption.textContent = eventTarget.alt;
-  togglePopup(imagePopup);
+  openPopup(imagePopup);
 }
 
 // Функция по добавлению обработчика для карточек (лайк, удалить)
@@ -175,7 +186,7 @@ function formAddSubmitHandler (evt) {
   });
   addCard(card);
 
-  togglePopup(popupAddForm);
+  closePopup(popupAddForm);
   titleInput.value = '';
   imageUrlInput.value = '';
 }
