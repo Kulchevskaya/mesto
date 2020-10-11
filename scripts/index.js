@@ -1,3 +1,17 @@
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
+// Параметры для валидатора
+const parameters = {
+  inputSelector: '.popup__form-item',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__form-item_type_error',
+  errorClass: 'popup__error-text_visible',
+  popupEditProfileSelector: '.popup_type_edit-form',
+  popupAddForm: '.popup_type_add-form'
+}
+
 // Выборка элементов для формы редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit-form');
 const popupEditProfileOpenButton = document.querySelector('.profile__edit-button');
@@ -19,7 +33,6 @@ const titleInput = popupAddForm.querySelector('.popup__form-item_type_place-titl
 const imageUrlInput = popupAddForm.querySelector('.popup__form-item_type_image-url-input');
 
 // Выборка элементов template карточек
-const cardTemplate = document.querySelector('#card-template').content;
 const cardsContainer = document.querySelector('.cards');
 
 // Выборка элементов для попап увеличения картинок
@@ -71,7 +84,7 @@ const getUserInfo = () => {
 const closePopupWithEsc = (evt) => {
   if (evt.key === 'Escape') {
     popupToClose = document.querySelector('.popup_opened');
-    togglePopup(popupToClose)
+    togglePopup(popupToClose);
   }
 }
  // Функция открытия попапа с дополнениями 
@@ -82,7 +95,7 @@ const openPopup = (item) => {
 
 const closePopup = (item) => {
   togglePopup(item);
-  document.addEventListener('keydown', closePopupWithEsc);
+  document.removeEventListener('keydown', closePopupWithEsc);
 }
 
 
@@ -125,65 +138,36 @@ const formSubmitHandler = (evt) => {
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
-// Функция по удалению карточки
-const deleteCard = (evt) => {
-  const eventTarget = evt.target;
-  eventTarget.closest('.cards__item').remove();
-}
+// валидация форм
+const popupEditProfileValidator = new FormValidator(parameters, parameters.popupEditProfileSelector);
+popupEditProfileValidator.enableValidation();
 
-// Функция по лайкам карточки
-const likeCard = (evt) => {
-  const eventTarget = evt.target;
-  eventTarget.classList.toggle('cards__like_active');
-}
-
-// Функция по увеличению карточек
-const zoomImage = (evt) => {
-  const eventTarget = evt.target;
-  imagePopupUrl.src = eventTarget.src;
-  imagePopupUrl.alt = eventTarget.alt;
-  imagePopupCaption.textContent = eventTarget.alt;
-  openPopup(imagePopup);
-}
-
-// Функция по добавлению обработчика для карточек (лайк, удалить)
-function setCardListeners(element) {  
-  element.querySelector('.cards__like').addEventListener('click', likeCard);  
-  element.querySelector('.cards__delete').addEventListener('click', deleteCard);  
-  element.querySelector('.cards__image').addEventListener('click', zoomImage);
-}
-
-// Функция по созданию карточки
-function createCard({name, link}) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardElementImage = cardElement.querySelector('.cards__image');
-  cardElementImage.alt = name;
-  cardElementImage.src = link;
-  cardElement.querySelector('.cards__text').textContent = name;
-  setCardListeners(cardElement);
-  return cardElement;  
-}
+const popupAddFormValidator = new FormValidator(parameters, parameters.popupAddForm);
+popupAddFormValidator.enableValidation();
 
 // Функция по добавлению карточки
 function addCard(item) {
   cardsContainer.prepend(item);
 }
 
-// Функция по выводу карточек в прод (╯ ° □ °) ╯ (┻━┻)
+// Функция по выводу карточек в прод
 function renderInitialCards(array) {
-  const arrayWithCards = array.map(createCard);
-  arrayWithCards.forEach(addCard);  
+  array.map(({name, link}) => {
+    const cardElement = new Card({name, link}, '#card-template');
+    const card = cardElement.generateCard();
+    addCard(card)
+  });
 }
 
 // Функция по добавлению новых карточек юзером
 function formAddSubmitHandler (evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-												// Так мы можем определить свою логику отправки.
-												// О том, как это делать, расскажем позже.
-  const card = createCard({
+  evt.preventDefault(); 
+
+  const cardElement = new Card({
     name: titleInput.value,
     link: imageUrlInput.value
-  });
+  }, '#card-template');
+  const card = cardElement.generateCard();
   addCard(card);
 
   closePopup(popupAddForm);
