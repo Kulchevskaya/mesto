@@ -69,11 +69,6 @@ const initialCards = [
   }
 ];
 
-// Функция по открытию/закрытию попапов
-const togglePopup = (item) => {
-  item.classList.toggle('popup_opened');
-}
-
 // Функция по взятию значений профаила в инпут попапа
 const getUserInfo = () => {
   nameInput.value = nameProfile.textContent;
@@ -82,19 +77,20 @@ const getUserInfo = () => {
 
 // Функция по закрытию попапов кнопкой esc
 const closePopupWithEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    popupToClose = document.querySelector('.popup_opened');
-    togglePopup(popupToClose);
+  const popupToClose = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape' && popupToClose) {
+    closePopup(popupToClose);
   }
 }
+
  // Функция открытия попапа с дополнениями 
-const openPopup = (item) => {
-  togglePopup(item);
+function openPopup(item) {
+  item.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupWithEsc);
 }
 
-const closePopup = (item) => {
-  togglePopup(item);
+function closePopup(item) {
+  item.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupWithEsc);
 }
 
@@ -116,7 +112,7 @@ imagePopupCloseButton.addEventListener('click', () => {closePopup(imagePopup)});
 //Функция по закрытию по оверлею
 const closePopupByClickOnOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
-    popupToClose = document.querySelector('.popup_opened');
+    const popupToClose = document.querySelector('.popup_opened');
     closePopup(popupToClose);
   }
 }

@@ -8,17 +8,22 @@ class Card {
   _getTemplate() {
     return document.querySelector(this._templateSelector).content.querySelector('.cards__item').cloneNode(true);
   }
-
-  _closePopupWithEsc = (evt) => {
-    if (evt.key === 'Escape') {
-      const popupToClose = document.querySelector('.popup_opened');
-      popupToClose.classList.toggle('popup_opened');
+  
+  _closePopupWithEsc(evt) {
+    const popupToClose = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape' && popupToClose) {
+      this._closePopup(popupToClose);
     }
   }
 
-  _openPopup = (item) => {
+  _openPopup(item) {
     item.classList.add('popup_opened');
     document.addEventListener('keydown', (evt) => { this._closePopupWithEsc(evt); });
+  }
+
+  _closePopup(item) {
+    item.classList.remove('popup_opened');
+    document.removeEventListener('keydown', (evt) => { this._closePopupWithEsc(evt); });
   }
 
   _zoomImage() {
