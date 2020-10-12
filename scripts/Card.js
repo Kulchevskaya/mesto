@@ -12,6 +12,7 @@ class Card {
     return document.querySelector(this._templateSelector).content.querySelector('.cards__item').cloneNode(true);
   }
   
+  // оставим до разбора в след спринте вопроса почему вызов идет только через коллбэк и как с этим жить
   // _closePopupWithEsc(evt) {
   //   const popupToClose = document.querySelector('.popup_opened');
   //   if (evt.key === 'Escape' && popupToClose) {
@@ -19,7 +20,6 @@ class Card {
   //   }
   // }
 
-  
   _openPopup(item) {
     item.classList.add('popup_opened');
     document.addEventListener('keydown', function closePopupWithEsc(evt) {
