@@ -3,38 +3,39 @@ class Card {
     this._name = name,
     this._link = link,
     this._templateSelector = templateSelector
+    this._imagePopup = document.querySelector('.popup_type_zoom-image');
+    this._imagePopupUrl = this._imagePopup.querySelector('.popup__image');
+    this._imagePopupCaption = this._imagePopup.querySelector('.popup__caption');
   }
 
   _getTemplate() {
     return document.querySelector(this._templateSelector).content.querySelector('.cards__item').cloneNode(true);
   }
   
-  _closePopupWithEsc(evt) {
-    const popupToClose = document.querySelector('.popup_opened');
-    if (evt.key === 'Escape' && popupToClose) {
-      this._closePopup(popupToClose);
-    }
-  }
+  // _closePopupWithEsc(evt) {
+  //   const popupToClose = document.querySelector('.popup_opened');
+  //   if (evt.key === 'Escape' && popupToClose) {
+  //     popupToClose.classList.remove('popup_opened');
+  //   }
+  // }
 
+  
   _openPopup(item) {
     item.classList.add('popup_opened');
-    document.addEventListener('keydown', (evt) => { this._closePopupWithEsc(evt); });
-  }
-
-  _closePopup(item) {
-    item.classList.remove('popup_opened');
-    document.removeEventListener('keydown', (evt) => { this._closePopupWithEsc(evt); });
+    document.addEventListener('keydown', function closePopupWithEsc(evt) {
+      const popupToClose = document.querySelector('.popup_opened');
+      if (evt.key === 'Escape' && popupToClose) {
+      popupToClose.classList.remove('popup_opened');
+      }
+      this.removeEventListener('keydown', closePopupWithEsc);
+    });
   }
 
   _zoomImage() {
-    const imagePopup = document.querySelector('.popup_type_zoom-image');
-    const imagePopupUrl = imagePopup.querySelector('.popup__image');
-    const imagePopupCaption = imagePopup.querySelector('.popup__caption');
-    
-    imagePopupUrl.src = this._element.querySelector('.cards__image').src
-    imagePopupUrl.alt = this._element.querySelector('.cards__image').alt;
-    imagePopupCaption.textContent = this._element.querySelector('.cards__image').alt;
-    this._openPopup(imagePopup);
+    this._imagePopupUrl.src = this._link
+    this._imagePopupUrl.alt = this._name;
+    this._imagePopupCaption.textContent = this._name;
+    this._openPopup(this._imagePopup);
   }
 
   _deleteCard() {

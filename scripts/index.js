@@ -38,8 +38,6 @@ const cardsContainer = document.querySelector('.cards');
 // Выборка элементов для попап увеличения картинок
 const imagePopup = document.querySelector('.popup_type_zoom-image');
 const imagePopupCloseButton = imagePopup.querySelector('.popup__close-button');
-const imagePopupUrl = imagePopup.querySelector('.popup__image');
-const imagePopupCaption = imagePopup.querySelector('.popup__caption');
 
 // Исходные карточки
 const initialCards = [

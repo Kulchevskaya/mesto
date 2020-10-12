@@ -12,7 +12,7 @@ class FormValidator {
   };
 
   _hideInputError(inputElement) {
-    const errorElement = inputElement.nextElementSibling;;
+    const errorElement = inputElement.nextElementSibling;
     errorElement.textContent = "";
     errorElement.classList.remove(this._parameters.errorClass);
     inputElement.classList.remove(this._parameters.inputErrorClass);
