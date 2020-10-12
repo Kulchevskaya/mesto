@@ -26,8 +26,8 @@ class Card {
       const popupToClose = document.querySelector('.popup_opened');
       if (evt.key === 'Escape' && popupToClose) {
       popupToClose.classList.remove('popup_opened');
-      }
       this.removeEventListener('keydown', closePopupWithEsc);
+      }      
     });
   }
 
