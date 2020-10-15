@@ -1,3 +1,8 @@
+// Добрый г-н Б. Айгалиев благодарю! кто же мог подумать, что можно вне класса объявить функцию и вызвать внутри класса ТТ__ТТ 
+// Комменты выше исчезнут впоследствии, но передать благодарность иначе нельзя ввиду запрета писать ревьюерам((
+// Импорт функции открытия попапа с дополнениями
+import { openPopup } from './utils.js';
+
 class Card {
   constructor({name, link}, templateSelector) {
     this._name = name,
@@ -12,30 +17,11 @@ class Card {
     return document.querySelector(this._templateSelector).content.querySelector('.cards__item').cloneNode(true);
   }
   
-  // оставим до разбора в след спринте вопроса почему вызов идет только через коллбэк и как с этим жить
-  // _closePopupWithEsc(evt) {
-  //   const popupToClose = document.querySelector('.popup_opened');
-  //   if (evt.key === 'Escape' && popupToClose) {
-  //     popupToClose.classList.remove('popup_opened');
-  //   }
-  // }
-
-  _openPopup(item) {
-    item.classList.add('popup_opened');
-    document.addEventListener('keydown', function closePopupWithEsc(evt) {
-      const popupToClose = document.querySelector('.popup_opened');
-      if (evt.key === 'Escape' && popupToClose) {
-      popupToClose.classList.remove('popup_opened');
-      this.removeEventListener('keydown', closePopupWithEsc);
-      }      
-    });
-  }
-
   _zoomImage() {
     this._imagePopupUrl.src = this._link
     this._imagePopupUrl.alt = this._name;
     this._imagePopupCaption.textContent = this._name;
-    this._openPopup(this._imagePopup);
+    openPopup(this._imagePopup);
   }
 
   _deleteCard() {

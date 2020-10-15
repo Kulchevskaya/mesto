@@ -1,5 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+import { closePopup, openPopup } from './utils.js';
 
 // Параметры для валидатора
 const parameters = {
@@ -72,26 +73,6 @@ const getUserInfo = () => {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 }
-
-// Функция по закрытию попапов кнопкой esc
-const closePopupWithEsc = (evt) => {
-  const popupToClose = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape' && popupToClose) {
-    closePopup(popupToClose);
-  }
-}
-
- // Функция открытия попапа с дополнениями 
-function openPopup(item) {
-  item.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupWithEsc);
-}
-
-function closePopup(item) {
-  item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupWithEsc);
-}
-
 
 // Функция по открытию Попапа профиля
 const toggleEditUserProfilePopup = () => {
