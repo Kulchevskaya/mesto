@@ -2,6 +2,7 @@ class FormValidator {
   constructor(parameters, formSelector) {
     this._parameters = parameters;
     this._formSelector = formSelector;
+    this._inputList = Array.from(document.querySelector(this._formSelector).querySelectorAll(this._parameters.inputSelector));
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -45,19 +46,24 @@ class FormValidator {
   }
 
   _setEventListeners(formElement) {
-    const inputList = Array.from(formElement.querySelectorAll(this._parameters.inputSelector));
     const buttonElement = formElement.querySelector(this._parameters.submitButtonSelector);
     // обнуляем кнопку при запуске
-    this._toggleButtonState(inputList, buttonElement);
+    this._toggleButtonState(this._inputList, buttonElement);
   
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         // чтобы проверять его при изменении любого из полей
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(this._inputList, buttonElement);
       });
     });
   };
+
+  cleanInputErrors() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  }
 
   enableValidation() {
     const formElement = document.querySelector(this._formSelector);

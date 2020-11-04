@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 
@@ -32,7 +31,6 @@
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>        
     </footer>
-
     <section class="popup popup_type_edit-form">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>        
@@ -62,7 +60,7 @@
             <span class="popup__error-text"></span>
           </label> 
           <label class="popup__field">
-            <input type="url" required class="popup__form-item popup__form-item_type_image-url-input" name="image-url" placeholder="Ссылка на картинку">
+            <input type="url" required class="popup__form-item popup__form-item_type_image-url-input" name="url" placeholder="Ссылка на картинку">
             <span class="popup__error-text"></span>
           </label>          
           <button type="submit" class="popup__submit-button">Создать</button>
@@ -72,7 +70,7 @@
     <section class="popup popup_type_zoom-image">
       <figure class="popup__image-container">
         <button class="popup__close-button" type="button"></button> 
-        <img class="popup__image" src="" alt="">
+        <img class="popup__image" src="#" alt="">
         <figcaption class="popup__caption"></figcaption>
       </figure>
     </section>
@@ -80,16 +78,12 @@
   <template id="card-template">
     <li class="cards__item">
       <button class="cards__delete" type="button"></button>
-      <img class="cards__image" src="" alt="">
+      <img class="cards__image" src="#" alt="">
       <div class="cards__box">
         <h2 class="cards__text"></h2>
         <button class="cards__like" type="button"></button>
       </div>
     </li>    
   </template>
-  <script src="./scripts/FormValidator.js" type="module"></script>
-  <script src="./scripts/utils.js" type="module"></script>
-  <script src="./scripts/Card.js" type="module"></script>
-  <script src="./scripts/index.js" type="module"></script>
 </body>
 </html>

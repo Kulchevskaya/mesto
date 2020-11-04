@@ -1,16 +1,9 @@
-// Добрый г-н Б. Айгалиев благодарю! кто же мог подумать, что можно вне класса объявить функцию и вызвать внутри класса ТТ__ТТ 
-// Комменты выше исчезнут впоследствии, но передать благодарность иначе нельзя ввиду запрета писать ревьюерам((
-// Импорт функции открытия попапа с дополнениями
-import { openPopup } from './utils.js';
-
 class Card {
-  constructor({name, link}, templateSelector) {
+  constructor({name, link}, templateSelector, openPopupWithImage) {
     this._name = name,
     this._link = link,
     this._templateSelector = templateSelector
-    this._imagePopup = document.querySelector('.popup_type_zoom-image');
-    this._imagePopupUrl = this._imagePopup.querySelector('.popup__image');
-    this._imagePopupCaption = this._imagePopup.querySelector('.popup__caption');
+    this._openPopupWithImage = openPopupWithImage;
   }
 
   _getTemplate() {
@@ -18,10 +11,9 @@ class Card {
   }
   
   _zoomImage() {
-    this._imagePopupUrl.src = this._link
-    this._imagePopupUrl.alt = this._name;
-    this._imagePopupCaption.textContent = this._name;
-    openPopup(this._imagePopup);
+    this._openPopupWithImage({
+      name: this._name, 
+      link: this._link});
   }
 
   _deleteCard() {
