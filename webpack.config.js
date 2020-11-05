@@ -10,6 +10,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
+
+  devServer: {
+    open: true,
+  },
   
   module: {
     rules: [
