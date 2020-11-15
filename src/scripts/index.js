@@ -105,7 +105,8 @@ const popupAddForm = new PopupWithForm({
           link: result.link, 
           likes: result.likes, 
           cardId: result._id, 
-          owner: result.owner._id }, '#card-template', openPopupWithImage, openPopupWithQuestion, likeCard);
+          owner: result.owner._id,
+          userId: result.owner._id}, '#card-template', openPopupWithImage, openPopupWithQuestion, likeCard);
         const cardElement = card.generateCard();
         initialCardsList.addItem(cardElement);
       })
