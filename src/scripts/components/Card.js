@@ -1,9 +1,15 @@
 class Card {
-  constructor({name, link}, templateSelector, openPopupWithImage) {
-    this._name = name,
-    this._link = link,
-    this._templateSelector = templateSelector
+  constructor({name, link, likes, cardId, owner, userId}, templateSelector, openPopupWithImage, openPopupWithQuestion, likeCard) {
+    this._name = name;
+    this._link = link;
+    this._likes = likes;
+    this._cardId = cardId;
+    this._owner = owner;
+    this._user = userId;
+    this._templateSelector = templateSelector;
     this._openPopupWithImage = openPopupWithImage;
+    this._openPopupWithQuestion = openPopupWithQuestion;
+    this._likeCards = likeCard;
   }
 
   _getTemplate() {
@@ -17,11 +23,30 @@ class Card {
   }
 
   _deleteCard() {
-    this._element.remove();
+    this._openPopupWithQuestion({
+      element: this._element,
+      id: this._cardId});
   }
   
   _likeCard() {
-    this._element.querySelector('.cards__like').classList.toggle('cards__like_active');
+    this._like = this._element.querySelector('.cards__like');
+    if (this._like.classList.contains('cards__like_active')) {
+      this._likeCards({
+        element: this._element, 
+        cardId: this._cardId, 
+        method: 'DELETE'})
+    } else {
+      this._likeCards({
+        element: this._element, 
+        cardId: this._cardId, 
+        method: 'PUT'})
+    }
+  }
+
+  _checkLikes() {
+    if (this._likes.some(item => item._id === this._user)) {
+      this._element.querySelector('.cards__like').classList.add('cards__like_active');
+    }
   }
 
   _setCardListeners() {  
@@ -36,9 +61,15 @@ class Card {
     cardElementImage.alt = this._name;
     cardElementImage.src = this._link;
     this._element.querySelector('.cards__text').textContent = this._name;
+    this._element.querySelector('.cards__counter').textContent = this._likes.length;
+    this._checkLikes();
     this._setCardListeners();
-
-    return this._element;
+    if (this._owner != this._user) {
+      this._element.querySelector('.cards__delete').classList.add('cards__delete_disabled');
+      return this._element;
+    } else {
+      return this._element;
+    }  
   }  
 }
 

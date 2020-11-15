@@ -1,8 +1,7 @@
 .cards__like {
-    max-width: 21px;
-    max-height: 19px;
-    padding: 10.5px 9.5px;
-    margin: 0 15px 0 0;    
+    max-width: 20px;
+    max-height: 18px;
+    padding: 10px 9px; 
     box-shadow: none;
     background: none;
     border: none; 
