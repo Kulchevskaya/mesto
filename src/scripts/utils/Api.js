@@ -19,9 +19,6 @@ export default class Api {
     .then((data) => {
       return data;
     })
-    .catch(err => {
-      alert(err);
-    })
   }
 
   renewUserInfo(inputValues) {
@@ -38,9 +35,6 @@ export default class Api {
     })
     .then((data) => {
       return data;
-    })
-    .catch(err => {
-      alert(err);
     })
   }
 
@@ -59,9 +53,6 @@ export default class Api {
     .then((data) => {
       return data;
     })
-    .catch(err => {
-      alert(err);
-    }) 
   }
 
   getInitialCards() {
@@ -77,9 +68,6 @@ export default class Api {
     })
     .then((data) => {
       return data;
-    })
-    .catch(err => {
-      alert(err);
     })
   } 
 
@@ -101,9 +89,6 @@ export default class Api {
     .then((data) => {
       return data;
     })
-    .catch(err => {
-      alert(err);
-    })
   }
 
   deleteCard(cardId) {
@@ -120,9 +105,6 @@ export default class Api {
     .then((data) => {
       return data;
     })
-    .catch(err => {
-      alert(err);
-    })
   }
   
   likeCard(cardId, method) {
@@ -138,9 +120,6 @@ export default class Api {
     })
     .then((data) => {
       return data;
-    })
-    .catch(err => {
-      alert(err);
-    })   
+    }) 
   }
 }
