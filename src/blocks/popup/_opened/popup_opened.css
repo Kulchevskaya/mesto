@@ -1,7 +1,0 @@
-.popup_opened {
-  z-index: 5; 
-  /* Появляется как в дымке */
-  height: 100%;
-  visibility: visible;
-  opacity: 1;
-}
